@@ -54,6 +54,7 @@ class FormBuilderPhoneField extends FormBuilderField<String> {
   final TextAlignVertical? textAlignVertical;
   final TextStyle? countryNameTextStyle;
   final TextStyle? countryCodeTextStyle;
+  final TextStyle? searchInputStyle;
 
   ///The [itemExtent] of [CupertinoPicker]
   /// The uniform height of all children.
@@ -163,6 +164,7 @@ class FormBuilderPhoneField extends FormBuilderField<String> {
     this.dialogTextStyle,
     this.countryNameTextStyle,
     this.countryCodeTextStyle,
+    this.searchInputStyle,
     this.isCupertinoPicker = false,
     this.cupertinoPickerSheetHeight,
     this.textAlignVertical,
@@ -396,8 +398,9 @@ class _FormBuilderPhoneFieldState
             titlePadding: widget.titlePadding ?? const EdgeInsets.all(8.0),
             searchCursorColor:
                 widget.cursorColor ?? Theme.of(context).primaryColor,
-            searchInputDecoration:
-                InputDecoration(hintText: widget.searchText ?? 'Search...'),
+            searchInputDecoration: InputDecoration(
+                hintText: widget.searchText ?? 'Search...',
+                labelStyle: widget.searchInputStyle),
             isSearchable: widget.isSearchable ?? true,
             title: widget.dialogTitle ??
                 Text(
