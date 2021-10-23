@@ -52,6 +52,8 @@ class FormBuilderPhoneField extends FormBuilderField<String> {
   final bool isCupertinoPicker;
   final double? cupertinoPickerSheetHeight;
   final TextAlignVertical? textAlignVertical;
+  final TextStyle? countryNameTextStyle;
+  final TextStyle? countryCodeTextStyle;
 
   ///The [itemExtent] of [CupertinoPicker]
   /// The uniform height of all children.
@@ -117,7 +119,7 @@ class FormBuilderPhoneField extends FormBuilderField<String> {
     FormFieldValidator<String>? validator,
     String? initialValue,
     InputDecoration decoration = const InputDecoration(),
-    ValueChanged<String>? onChanged,
+    ValueChanged<String?>? onChanged,
     ValueTransformer<String>? valueTransformer,
     bool enabled = true,
     FormFieldSetter<String>? onSaved,
@@ -159,6 +161,8 @@ class FormBuilderPhoneField extends FormBuilderField<String> {
     this.priorityListByIsoCode,
     this.countryFilterByIsoCode,
     this.dialogTextStyle,
+    this.countryNameTextStyle,
+    this.countryCodeTextStyle,
     this.isCupertinoPicker = false,
     this.cupertinoPickerSheetHeight,
     this.textAlignVertical,
@@ -195,7 +199,7 @@ class FormBuilderPhoneField extends FormBuilderField<String> {
             final state = field as _FormBuilderPhoneFieldState;
 
             return InputDecorator(
-              decoration: state.decoration(),
+              decoration: state.decoration,
               child: Row(
                 children: <Widget>[
                   GestureDetector(
@@ -429,8 +433,14 @@ class _FormBuilderPhoneFieldState
       child: ListTile(
         contentPadding: EdgeInsets.zero,
         leading: CountryPickerUtils.getDefaultFlagImage(country),
-        title: Text(country.name),
-        trailing: Text('+${country.phoneCode}'),
+        title: Text(
+          country.name,
+          style: widget.countryNameTextStyle,
+        ),
+        trailing: Text(
+          '+${country.phoneCode}',
+          style: widget.countryCodeTextStyle,
+        ),
       ),
     );
   }
