@@ -41,6 +41,7 @@ class FormBuilderPhoneField extends FormBuilderField<String> {
   final VoidCallback? onTap;
 
   // For country dialog
+  final Widget? searchEmptyView;
   final String? searchText;
   final EdgeInsets? titlePadding;
   final bool? isSearchable;
@@ -55,6 +56,7 @@ class FormBuilderPhoneField extends FormBuilderField<String> {
   final TextStyle? countryNameTextStyle;
   final TextStyle? countryCodeTextStyle;
   final TextStyle? searchInputStyle;
+  final TextStyle? hintStyle;
 
   ///The [itemExtent] of [CupertinoPicker]
   /// The uniform height of all children.
@@ -154,6 +156,7 @@ class FormBuilderPhoneField extends FormBuilderField<String> {
     this.minLines,
     this.showCursor,
     this.onTap,
+    this.searchEmptyView,
     this.searchText,
     this.titlePadding,
     this.dialogTitle,
@@ -165,6 +168,7 @@ class FormBuilderPhoneField extends FormBuilderField<String> {
     this.countryNameTextStyle,
     this.countryCodeTextStyle,
     this.searchInputStyle,
+    this.hintStyle,
     this.isCupertinoPicker = false,
     this.cupertinoPickerSheetHeight,
     this.textAlignVertical,
@@ -396,10 +400,12 @@ class _FormBuilderPhoneFieldState
           ),
           child: CountryPickerDialog(
             titlePadding: widget.titlePadding ?? const EdgeInsets.all(8.0),
+            searchEmptyView: widget.searchEmptyView,
             searchCursorColor:
                 widget.cursorColor ?? Theme.of(context).primaryColor,
             searchInputDecoration: InputDecoration(
                 hintText: widget.searchText ?? 'Search...',
+                hintStyle: widget.hintStyle,
                 labelStyle: widget.searchInputStyle),
             isSearchable: widget.isSearchable ?? true,
             title: widget.dialogTitle ??
